@@ -522,7 +522,7 @@ macro_rules! take_until_and_consume (
       } else {
         match ($i).find_substring($substr) {
           None => {
-            $crate::IResult::Error(error_position!($crate::ErrorKind::TakeUntilAndConsume,$i))
+            $crate::IResult::Incomplete($crate::Needed::Unknown)
           },
           Some(index) => {
             $crate::IResult::Done($i.slice(index+$substr.input_len()..), $i.slice(0..index))
@@ -549,7 +549,7 @@ macro_rules! take_until (
       } else {
         match ($i).find_substring($substr) {
           None => {
-            $crate::IResult::Error(error_position!($crate::ErrorKind::TakeUntil,$i))
+            $crate::IResult::Incomplete($crate::Needed::Unknown)
           },
           Some(index) => {
             $crate::IResult::Done($i.slice(index..), $i.slice(0..index))
@@ -584,7 +584,7 @@ macro_rules! take_until_either_and_consume (
             res
           },
           None    => {
-            $crate::IResult::Error(error_position!($crate::ErrorKind::TakeUntilEitherAndConsume,$input))
+            $crate::IResult::Incomplete($crate::Needed::Unknown)
           }
         };
         res
@@ -615,7 +615,7 @@ macro_rules! take_until_either (
             res
           },
           None    => {
-            $crate::IResult::Error(error_position!($crate::ErrorKind::TakeUntilEither,$input))
+            $crate::IResult::Incomplete($crate::Needed::Unknown)
           }
         };
         res
